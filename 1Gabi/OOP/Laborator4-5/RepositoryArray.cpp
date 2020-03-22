@@ -23,7 +23,7 @@ int RepositoryArray::findElem(GymExercise e)
      }
      return -1;
 }
-
+// test
 GymExercise RepositoryArray::findElemByName(char* name)
 {
     int i = 0;
