@@ -71,6 +71,7 @@ void testRepo()
       assert(repo.getAll()[0] == e1);
       repo.delElem(e2);
       assert(repo.dim() == 1);
+      assert(repo.getAll()[repo.dim()-1] == e1);
 
       GymExercise e3("tricep back", 10, 10, 5);
       repo.addElem(e3);
@@ -79,9 +80,9 @@ void testRepo()
       assert(repo.getAll()[1] == e1);
       repo.updateElem(e1, (char*)"tricep back", 10, 10 ,5 );
       assert(repo.getAll()[0] == e3);
+      cout<<"Passed";
 
-
-
+ //UI -> Service -> Repo
   
 
 }

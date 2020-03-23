@@ -1,6 +1,7 @@
 #include "Gym.h"
 #include "Tests.h"
-#include "Operations.h"
+#include "ServiceTests.h"
+#include "Service.h"
 #include "RepositoryArray.h"
 #include <iostream>
 
@@ -24,6 +25,10 @@ void printMenu()
    float weightKg {};
    int ok = 1;
    RepositoryArray repo;
+   GymExercise e1("tricep", 10, 3, 10);
+   GymExercise e2("extension", 9, 3, 3);
+   repo.addElem(e1);
+   repo.addElem(e2);
    while(ok == 1)
    {
       menu();
@@ -125,6 +130,7 @@ int main()
    testConstructor();
    testSetGet();
    testRepo();
+   //testAddDeleteElem();
    printMenu();
 
 }
