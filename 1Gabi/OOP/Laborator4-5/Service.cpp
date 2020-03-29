@@ -1,8 +1,19 @@
 #include "Service.h"
 
 
-Service::Service(){
-    this->repo;
+Service::Service()
+{
+  this->repo;
+}
+
+Service::Service(RepositoryArray repoServ)
+{
+    repoServ = repo;
+}
+
+Service::Service(const Service& serv)
+{
+    repo = serv.repo;
 }
 
 Service::~Service()
@@ -11,6 +22,7 @@ Service::~Service()
 
 void Service::addElemServ(GymExercise& e)
 {
+
     repo.addElem(e);
 }
 
@@ -22,6 +34,16 @@ void Service::delElemServ(GymExercise e)
 void Service::updateElemServ(GymExercise& e, char* name, int nos,int nor, float weightKg)
 {
     repo.updateElem(e, name, nos, nor ,weightKg);
+}
+
+GymExercise Service::getItemFromPosServ(int pos)
+{
+    return repo.getItemFromPos(pos);
+}
+
+GymExercise Service::findElemByNameServ(char* name)
+{
+    return repo.findElemByName(name);
 }
 
 GymExercise* Service::getAllServ()
@@ -36,30 +58,31 @@ int Service::dimServ()
 
 
 
-// void Service::produsPesteX(Service &repo, GymExercise found[],int x, int &j)
-// {
-// 	j = 0;
-//     for(int i = 0 ; i < repo.dim(); i++)
-//     {
-//         GymExercise repoPos = repo.getItemFromPos(i);
-//         if(repoPos.getNoOfReps() * repoPos.getNoOfSeries() * repoPos.getWeightKg() > x)
-//             {
-//                 found[j++] = repoPos;
-//             }
-//     }
-// }
+void Service::produsPesteX(GymExercise found[], int x, int& j)
+{
+	j = 0;
+    for(int i = 0 ; i < repo.dim(); i++)
+    {
+        GymExercise servPos = repo.getItemFromPos(i);
+        if(servPos.getNoOfReps() * servPos.getNoOfSeries() * servPos.getWeightKg() > x)
+            {
+                found[j++] = servPos;
+            }
+    }
+}
 
-// void Service::stergereSub5(RepositoryArray& repo)
-// {
-//     for(int i = 0 ; i < repo.dim(); i++)
-//     {
-//         GymExercise repoPos = repo.getItemFromPos(i);
-//         if(repoPos.getWeightKg() * repoPos.getNoOfReps() < 5)
-//         {
-//             repo.delElem(repo.getItemFromPos(i));
-//             i--;
-//         }
-//     }   
+void Service::stergereSub5()
+{
+    for(int i = 0 ; i < repo.dim(); i++)
+    {
+        GymExercise servPos = repo.getItemFromPos(i);
+        if(servPos.getWeightKg() * servPos.getNoOfReps() < 5)
+        {
+            repo.delElem(repo.getItemFromPos(i));
+            i--;
+        }
+    }
+}   
 
 
 

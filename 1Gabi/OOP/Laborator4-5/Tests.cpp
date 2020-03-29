@@ -80,7 +80,7 @@ void testRepo()
       assert(repo.getAll()[1] == e1);
       repo.updateElem(e1, (char*)"tricep back", 10, 10 ,5 );
       assert(repo.getAll()[0] == e3);
-      cout<<"Passed";
+      cout<<"Passed\n";
 
  //UI -> Service -> Repo
   

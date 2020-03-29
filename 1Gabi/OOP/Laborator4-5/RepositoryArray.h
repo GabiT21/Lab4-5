@@ -9,11 +9,11 @@ private:
 public:
     RepositoryArray();
     void addElem(GymExercise);
-    int findElem(GymExercise);
+    int findElem(GymExercise&);
     GymExercise findElemByName(char* name);
     GymExercise getItemFromPos(int);
     void delElem(GymExercise);
-    void updateElem(GymExercise,char*, int, int, float);
+    void updateElem(GymExercise&,char*, int, int, float);
     GymExercise* getAll();
     int getElem();
     int dim();

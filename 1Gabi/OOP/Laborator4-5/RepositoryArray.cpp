@@ -12,7 +12,7 @@ void RepositoryArray::addElem(GymExercise s)
     elem[size++] = s;
 }
 
-int RepositoryArray::findElem(GymExercise e)
+int RepositoryArray::findElem(GymExercise& e)
 {
      int i = 0;
      while( i < size)
@@ -46,7 +46,7 @@ GymExercise RepositoryArray::findElemByName(char* name)
      }
  }
 
-void RepositoryArray::updateElem(GymExercise e,char* n, int nos, int nor, float wk)
+void RepositoryArray::updateElem(GymExercise& e,char* n, int nos, int nor, float wk)
 {
     int i = findElem(e);
     if (i != -1)

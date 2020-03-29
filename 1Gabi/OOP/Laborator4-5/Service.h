@@ -15,10 +15,12 @@ public:
     GymExercise* getAllServ();
     void delElemServ(GymExercise);
     void updateElemServ(GymExercise& e, char*, int, int, float);
-    GymExercise getItemFromPosServ(int);
     int dimServ();
-    void produsPesteX(Service&, GymExercise,int , int&);
-    void stergereSub5(Service& , int&);
+    GymExercise getItemFromPosServ(int);
+    GymExercise findElemByNameServ(char* name);
+    void produsPesteX(GymExercise [],int , int&);
+    void stergereSub5();
+    //void stergereSub5(Service& , int&);
 };
 
 
