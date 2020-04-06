@@ -1,101 +1,69 @@
 #include "Aplicatie.h"
-#include <cstddef>
-#include <string.h>
-#include <ostream>
-#include <iostream>
-#include <cstring>
 
 
-using namespace std;
+Aplicatie::Aplicatie() : nume {NULL}, consumKb {0}, status {NULL}
+{}
 
-Aplicatie::Aplicatie()
-{
-    nume = NULL;
-    consumKb = 0;
-    status = 0;
-}
-
-Aplicatie::Aplicatie(const char* nume, int consumKb, const char* status) :consumKb(consumKb)
-{
-    this->nume = new char[strlen(nume) +1];
-    strcpy(this->nume,nume);
-    this->status = new char[strlen(status) +1];
-    strcpy(this->status,status);
-}
+Aplicatie::Aplicatie(const std::string& nume, int consumKb, const std::string& status) 
+    : nume(nume), consumKb(consumKb), status(status)
+{}
 
 Aplicatie::Aplicatie(const Aplicatie& a)
 {
-    this->nume = new char[strlen(a.nume) +1];
-    strcpy(this->nume,a.nume);
-    this->consumKb = consumKb;
-    this->status = new char[strlen(a.status) +1];
-    strcpy(this->status,a.status);
+    this->nume = a.nume;
+    this->consumKb = a.consumKb;
+    this->status = a.status;
 }
 
 Aplicatie::~Aplicatie()
+{}
+
+const std::string& Aplicatie::getNume() const
 {
-    if(nume != NULL)
-        delete[] nume;
-    if(status != NULL)
-        delete[] status;
-    consumKb = -1;
+    return nume;
 }
 
-char* Aplicatie::getNume()
+int Aplicatie::getConsumKb() const
 {
-    return this->nume;
+    return consumKb;
 }
 
-int Aplicatie::getConsumKb()
+const std::string& Aplicatie::getStatus() const
 {
-    return this->consumKb;
+    return status;
 }
 
-char* Aplicatie::getStatus()
+void Aplicatie::setNume(const std::string& nume)
 {
-    return this->status;
-
+    this->nume = nume;
 }
 
-void Aplicatie::setNume(char* n)
+void Aplicatie::setConsumKb(int c)
 {
-    if(nume != NULL)
-        delete[] nume;
-    nume = new char[strlen(n) + 1];
-    strcpy(nume, n);
-
+    consumKb = c;
 }
 
-void Aplicatie::setConsumKb(int consum)
+void Aplicatie::setStatus(const std::string& s)
 {
-    consumKb = consum;
+    status = s;
 }
 
-void Aplicatie::setStatus(char* sts)
+Aplicatie& Aplicatie::operator=(const Aplicatie& other)
 {
-     if(status != NULL)
-        delete[] status;
-    status = new char[strlen(sts) + 1];
-    strcpy(status, sts);
+    if (*this == other)
+        return *this;
+    this->nume     = other.nume;
+    this->consumKb = other.consumKb;
+    this->status   = other.status;
 }
 
-Aplicatie& Aplicatie::operator= (const Aplicatie& a)
+bool Aplicatie::operator==(const Aplicatie& other) const
 {
-    if(this == &a) return *this; // sa nu fie de ex e = e;
-    if(nume) delete[] nume;
-    nume = new char [strlen(a.nume) + 1];
-    strcpy(nume, a.nume);
-    consumKb = a.consumKb;
-    if(status != NULL) delete[] status;
-    status = new char [strlen(a.status) + 1];
-    return *this;
+    return this->nume == other.nume && this->status == other.status && this->consumKb == other.consumKb;
 }
 
-bool Aplicatie::operator==(const Aplicatie& a)
+std::ostream& operator<<(std::ostream& os, const Aplicatie& a)
 {
-    return(strcmp(nume,a.nume) == 0) and (consumKb == a.consumKb) and (strcmp(status, a.status) ==0);
+    os << a.nume << " " << a.consumKb << " " << a.status;
+    return os;
 }
-
-
-
-

@@ -1,27 +1,28 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <string>
 
-using namespace std;
 
 class Aplicatie
 {
 private:
-    char* nume;
+    std::string nume;
     int consumKb;
-    char* status;
+    std::string status;
 
 public:
     Aplicatie();
-    Aplicatie(const char*, int,const char*);
+    Aplicatie(const std::string& nume, int consumKb, const std::string& status);
     Aplicatie(const Aplicatie&);
     ~Aplicatie();
-    char* getNume();
-    int getConsumKb();
-    char* getStatus();
-    void setNume(char*);
+    const std::string& getNume() const;
+    int getConsumKb() const ;
+    const std::string& getStatus() const ;
+    void setNume(const std::string&);
     void setConsumKb(int);
-    void setStatus(char*);
+    void setStatus(const std::string&);
     Aplicatie& operator=(const Aplicatie&);
-    bool operator==(const Aplicatie&);
-    public:
+    bool operator==(const Aplicatie&) const;
+    friend std::ostream& operator<<(std::ostream& os, const Aplicatie& a);
 };
