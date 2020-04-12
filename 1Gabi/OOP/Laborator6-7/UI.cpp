@@ -1,7 +1,6 @@
 #include "UI.h"
 
-UI::UI(Service& serv)
-    : serv(serv)
+UI::UI(Service& serv): serv(serv)
 {}
 
 UI::~UI()
@@ -17,7 +16,7 @@ void UI::menu()
    std::cout<< "3. Modificare aplicatie "       << '\n';
    // cout<< "4. Numar de aplicatii "      << '\n';
    std::cout<< "4. Stergere aplicatie "         << '\n';
-   std::cout<< "6.  Exit : "                    << '\n';
+   std::cout<< "6.  Exit  "                     << '\n';
 }
 
 void UI::addAplicatie()
@@ -29,8 +28,8 @@ void UI::addAplicatie()
     std::cin >> nume;
     std::cout << "ConsumKb: ";
     std::cin >> consum;
-    std::cout << "Status: ";
-    std::cin >> status;
+    // std::cout << "Status: ";
+    // std::cin >> status;
 	
 	int consumKb = 0;
 	

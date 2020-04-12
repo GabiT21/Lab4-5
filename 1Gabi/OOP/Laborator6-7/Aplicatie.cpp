@@ -4,9 +4,12 @@
 Aplicatie::Aplicatie() : nume {NULL}, consumKb {0}, status {NULL}
 {}
 
-Aplicatie::Aplicatie(const std::string& nume, int consumKb, const std::string& status) 
-    : nume(nume), consumKb(consumKb), status(status)
-{}
+Aplicatie::Aplicatie(const std::string& nume, int consumKb, const std::string& status) {
+
+    setNume(nume);
+    setConsumKb(consumKb);
+    setStatus(status);
+}
 
 Aplicatie::Aplicatie(const Aplicatie& a)
 {
@@ -39,8 +42,8 @@ void Aplicatie::setNume(const std::string& nume)
 }
 
 void Aplicatie::setConsumKb(int c)
-{
-    consumKb = c;
+{   
+    this->consumKb = c;
 }
 
 void Aplicatie::setStatus(const std::string& s)

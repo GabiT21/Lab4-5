@@ -10,6 +10,7 @@ private:
     std::string nume;
     int consumKb;
     std::string status;
+    const int standardKb = 2000;
 
 public:
     Aplicatie();

@@ -1,3 +1,6 @@
-ap3 2000 ram
-ap2 5000 swap
-t1 500 ram
+ap1 500 swap
+ap4 450 ram
+ap5 1000 ram
+g 1 ram
+rt 34 ram
+rt 50 ram

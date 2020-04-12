@@ -1,115 +1,93 @@
-// #include "Repo.h"
-// #include <string.h>
+#include "Repo.h"
+#include <string.h>
+#include "RepoFile.h"
 
-// Repo::Repo()
-// 	: base_id(0), fis(NULL)
-// {}
+bool is_empty(std::ifstream& pFile)
+{
+	return pFile.peek() == std::ifstream::traits_type::eof();
+}
 
+AppRepoFile::AppRepoFile()
+	:fis(nullptr)
+{
+}
 
+AppRepoFile::AppRepoFile(const char* fileName)
+	: fis(fileName)
+{}
 
+void AppRepoFile::loadFromFile(const char * fileName)
+{
+	elems.clear();
+	base_id = 0;
 
-// Repo::Repo(const char* fileName)
-// {
-// 	base_id = 0;
-// 	fis = fileName;
-// 	std::ifstream f(fis);
+	fis = fileName;
+	std::ifstream f(fis);
 
-// 	std::string nume;
-//     int consumKb;
-//     std::string status;
+	if (is_empty(f))
+	{
+		f.close();
+		return;
+	}
 
-// 	while (!f.eof()) {
-// 		f >> nume >> consumKb >> status;
-// 		if (!nume.empty()) {
-// 			Aplicatie A(nume, consumKb, status);
-// 			elems.insert({base_id, A});
-// 		}
-// 	}
-// 	f.close();
-// }
+	std::string nume;
+    int consumKb;
+    std::string status;
 
-// void Repo::loadFromFile(const char * fileName)
-// {
-// 	elems.clear();
-// 	base_id = 0;
-
-// 	fis = fileName;
-// 	std::ifstream f(fis);
-
-// 	std::string nume;
-//     int consumKb;
-//     std::string status;
-
-// 	while (!f.eof()) {
-// 		f >> nume >> consumKb >> status;
-// 		if(!nume.empty()){
-// 			Aplicatie A(nume, consumKb, status);
-// 			elems.insert({base_id++, A});
-// 		}
-// 	}
+	while (!f.eof()) {
+		f >> nume >> consumKb >> status;
+		if(!nume.empty()){
+			Aplicatie A(nume, consumKb, status);
+			elems.insert({base_id++, A});
+		}
+	}
 	
-// 	f.close();
-// }
-
-// void Repo::addAplicatie(const Aplicatie& a)
-// {
-// 	for( auto& it : elems )
-// 	{
-// 		if( it.second == a)
-// 		{
-// 			throw std::string("Existing element!\n");
-// 		}
-// 	}
-//     elems.insert({base_id++, a});
-// 	//saveToFile();
-// }
-
-// void Repo::updateAplicatie(Aplicatie& a, int pos)
-// {
-// 	//elems[pos]==a;
-//     /*this->removeAplicatie(pos);
-// 	this->addAplicatie(a);*/
-// 	auto it = elems.find(pos);
-// 	if (it == elems.end())
-// 		throw std::string("Inexisting element!\n");
-// 	it->second = a;
-// 	//saveToFile();
-// }
-
-// void Repo::removeAplicatie(int pos)
-// {
-// 	auto it = elems.find(pos);
-// 	if( it == elems.end() )
-// 		throw std::string("Inexisting element!\n");
-//     elems.erase(pos);
-// 	//saveToFile();
-// }
-
-// const std::unordered_map<int, Aplicatie>& Repo::getAll() const
-// {
-//     return this->elems;
-// }
-// int RepoFile::dim() const
-// {
-//     return this->elems.size();
-// }
-
-// void RepoFile::saveToFile()
-// {
-// 	std::ofstream f(fis);
-// 	for(const auto& it : elems )
-//  	{
-// 		f << it.second<<"\n";
-// 	}
-// 	f.close();
-// }
+	f.close();
+}
 
 
+void AppRepoFile::saveToFile()
+{
+	std::ofstream f(fis);
+	for(const auto& it : elems )
+ 	{
+		f << it.second<<"\n";
+	}
+	f.close();
+}
 
+void AppRepoFile::addAplicatie(const Aplicatie& T)
+{
+	this->loadFromFile(fis);
+	AppRepo::addAplicatie(T);
+	this->saveToFile();
+}
 
-// Repo::~Repo()
-// {
-//     base_id = 0;
-// }
+void AppRepoFile::updateAplicatie(Aplicatie& T, int pos)
+{
+	this->loadFromFile(fis);
+	AppRepo::updateAplicatie(T, pos);
+	this->saveToFile();
+}
+
+void AppRepoFile::removeAplicatie(int pos)
+{
+	this->loadFromFile(fis);
+	AppRepo::removeAplicatie(pos);
+	this->saveToFile();
+}
+
+int AppRepoFile::dim()
+{
+	this->loadFromFile(fis);
+	return AppRepo::dim();
+
+}
+
+std::unordered_map<int, Aplicatie>& AppRepoFile::getAll()
+{
+	this->loadFromFile(fis);
+	return AppRepo::getAll();
+}
 
 

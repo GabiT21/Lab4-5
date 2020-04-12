@@ -7,7 +7,7 @@
 
 void testAdd()
 {
-    Repo repo;
+    AppRepo repo;
     assert(repo.dim() == 0);
     Aplicatie A("ap1", 1000, "swap");
     repo.addAplicatie(A);
@@ -29,7 +29,7 @@ void testAdd()
 
 void testUpdate()
 {
-    Repo repo;
+    AppRepo repo;
     assert(repo.dim() == 0);
     Aplicatie A1("ap1", 1000, "swap");
     Aplicatie A2("ap2", 100, "ram");
@@ -57,7 +57,7 @@ void testUpdate()
 
 void testDelete()
 {
-    Repo repo;
+    AppRepo repo;
     assert(repo.dim() == 0);
     Aplicatie A1("ap1", 1000, "swap");
     Aplicatie A2("ap2", 100, "ram");
