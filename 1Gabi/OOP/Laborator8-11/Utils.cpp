@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iostream>
 
+
 std::vector<std::string> splitLine(std::string linie, char delim)
 {
 
