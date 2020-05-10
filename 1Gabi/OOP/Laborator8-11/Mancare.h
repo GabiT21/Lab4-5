@@ -1,28 +1,25 @@
 #pragma once
-#include <iostream>
+#include "Comanda.h"
 
-class Mancare
+class Mancare : public Comanda
 {
-    private:
-    std::string numeClient;
-    std::string adresaClient;
-    int pretTotal;
-    std::string numeMagazin; 
+private:
+    std::string listaPreparate;
 
-    public:
+public:
     Mancare();
-    Mancare(const std::string numeClient, const std::string adresaClient, int pretTotal, const std::string numeMagazin);
+    Mancare(const std::string ,const std::string ,float, const std::string);
     Mancare(const Mancare&);
+    Mancare(std::string, char);
     ~Mancare();
-    const std::string& getNumeClient() const;
-    int getPretTotal() const;
-    const std::string& getAdresaClient() const ;
-    const std::string& getNumeMagazin() const ;
-    void setNumeClient(const std::string&);
-    void setAdresaClient(const std::string&);
-    void setPretTotal(int);
-    void setNumeMagazin(const std::string&);
+    const std::string getListaPreparate();
+    void setListaPreparate(const std::string);
+
     Mancare& operator=(const Mancare&);
-    bool operator==(const Mancare&) const;
-    friend std::ostream& operator<<(std::ostream& os, const Mancare& m);   
+    bool operator==(const Mancare& other) const;
+    friend std::istream& operator >>(std::istream&, Mancare&);
+    friend std::ostream& operator <<(std::ostream&, Mancare);
+
+    std::string toString();
+    std::string toStringWithDelimiter(char);
 };
