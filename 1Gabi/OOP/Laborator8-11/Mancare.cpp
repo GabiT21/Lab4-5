@@ -1,81 +1,80 @@
 #include "Mancare.h"
+#include "Utils.h"
 
-Mancare::Mancare() : numeClient{NULL}, adresaClient{NULL}, pretTotal{0}, numeMagazin{NULL}
+Mancare::Mancare() :Comanda()
 {}
 
-Mancare::Mancare(const std::string numeClient, const std::string adresaClient, int pretTotal, const std::string numeMagazin)
-: numeClient{numeClient}, adresaClient{adresaClient}, pretTotal{pretTotal}, numeMagazin{numeMagazin}
-{}
-
-Mancare::Mancare(const Mancare& m)
+Mancare::Mancare(const std::string numeClient, const std::string adresaClient, float pretTotal, const std::string listaPreparate) : Comanda(numeClient, adresaClient, pretTotal)
 {
-    this->numeClient = m.numeClient;
-    this->adresaClient = m.adresaClient;
-    this->pretTotal = m.pretTotal;
-    this->numeMagazin = m.numeMagazin;
+    // listaPreparate = listaPreparate;
+    // pretTotal = pretTotal;
+    //setListaPreparate(listaPreparate);
+    this->listaPreparate = listaPreparate;
+}
+
+Mancare::Mancare(const Mancare&m) : Comanda(m)
+{
+    listaPreparate = m.listaPreparate;
 }
 
 Mancare::~Mancare()
 {}
 
-const std::string& Mancare::getNumeClient() const
+
+Mancare::Mancare(std::string linie, char delim)
 {
-    return numeClient;
+    std::vector<std::string> tokens = splitLine(linie, delim);
+    numeClient = tokens[0];
+    adresaClient = tokens[1];
+    pretTotal = stoi(tokens[2]);
+    listaPreparate = tokens[3];
+}
+void Mancare::setListaPreparate(const std::string lp)
+{
+    listaPreparate =lp;
 }
 
-const std::string& Mancare::getAdresaClient() const
+const std::string Mancare::getListaPreparate()
 {
-    return adresaClient;
+    return listaPreparate;
 }
-
-int Mancare::getPretTotal() const
-{
-    return pretTotal;
-}
-
-const std::string& Mancare::getNumeMagazin() const
-{
-    return numeMagazin;
-}
-
-void Mancare::setNumeClient(const std::string& nClient)
-{
-    numeClient = nClient;
-}
-
-void Mancare::setAdresaClient(const std::string& adresaC)
-{
-    adresaClient = adresaC;
-}
-
-void Mancare::setPretTotal(const int p)
-{
-    pretTotal = p;
-}
-
-void Mancare::setNumeMagazin(const std::string& numeMag)
-{
-    numeMagazin = numeMag;
-}
-
 
 Mancare& Mancare::operator=(const Mancare& other)
 {
-    if (*this == other)
-        return *this;
-    this->numeClient   = other.numeClient;
-    this->adresaClient = other.adresaClient;
-    this->pretTotal    = other.pretTotal;
-    this->numeMagazin  = other.numeMagazin;
+    Comanda::operator=(other);
+    // if(*this == other)
+    //     return *this;
+    listaPreparate = other.listaPreparate;
+    return *this;
 }
 
 bool Mancare::operator==(const Mancare& other) const
 {
-    return this->numeClient   == other.numeClient and this->adresaClient == other.adresaClient and this->pretTotal    == other.pretTotal and this->numeMagazin  == other.numeMagazin;
+    return Comanda::operator==(other) and this->listaPreparate == other.listaPreparate;
 }
 
-std::ostream& operator<<(std::ostream& os, const Mancare& a)
+
+std::string Mancare::toString()
 {
-    os << a.numeClient << " " << a.adresaClient << " " << a.pretTotal<<" "<<a.numeMagazin;
+    std::string str1, str2;
+    str1 = numeClient;
+    str2 = adresaClient;
+    return str1 + " " + str2 + " " + std::to_string(pretTotal);
+}
+
+std::string Mancare::toStringWithDelimiter(char delimiter)
+{
+    std::string str1, str2;
+    str1 = numeClient;
+    str2 = adresaClient;
+    return str1 + delimiter + str2 + delimiter + std::to_string(pretTotal);
+}
+
+
+std::ostream& operator<<(std::ostream& os, Mancare a)
+{
+     os << a.getNumeClient() << " " << a.getAdresaClient() << " " << a.getPretTotal() <<" " << a.getListaPreparate()<< "\n";
     return os;
 }
+
+

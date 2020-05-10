@@ -1,57 +1,46 @@
 #include "Tests.h"
-#include "Mancare.h"
-#include <iostream>
-#include <assert.h>
-#include <string>
+#include "assert.h"
 
-
-void testConstructor()
+void testMancare()
 {
 
-    Mancare a2("m2","str1",50, "Mega");
-    std::string numeClient = "a2";
-    std::string getNume = a2.getNumeClient();
-    std::string adresaClient = "str1";
-    std::string getAdresaClient = a2.getAdresaClient();
-    std::string getNumeMagazin = a2.getNumeMagazin();
-    std::string numeMagazin = "Mega";
-    int pretTotal = 50;
-    int getPret = a2.getPretTotal();
-    assert(getNume == numeClient and getAdresaClient == adresaClient and getPret == pretTotal and getNumeMagazin == numeMagazin);
-    
-    //if(a1 != NULL)
-     //   delete a1, a1 = NULL;
-    std::cout<<"Teste constr\n";
+    Mancare m2("Vasile", "Lalelor,nr 15",25 , "lapte, oua");
+    Mancare m3(m2);
+
+    m2 = m3;
+    assert(m2 == m3);
+    std::string nume = "Vasile";
+    std::string getNume = m2.getNumeClient();
+    std::string getAdresa = m2.getAdresaClient();
+    std::string adresa = "Lalelor,nr 15";
+    assert(nume == getNume);
+    assert(getAdresa == adresa);
+    std::cout<<"1\n";
 }
 
-
-void testSetGet()
+void testComanda()
 {
-    Mancare a;
-    a.setNumeClient((std::string)"ap1");
-    a.setAdresaClient((std::string)"str1");
-    a.setPretTotal(30);
-    a.setNumeMagazin((std::string)"Mega");
-    std::string nume = "ap1";
-    int pretTotal = 30;
-    assert(nume == a.getNumeClient());
-    assert(a.getPretTotal() == pretTotal);
-    std::string numeMagazin = "Mega";
-    assert(numeMagazin == a.getNumeMagazin());
-    numeMagazin = "Kauf";
-    assert(numeMagazin != a.getNumeMagazin());
-    std::cout<<"Tsetget\n";
+    Comanda c2("Popescu", "Lalelelor,nr 15",15);
+    std::string numeC = "Popescu";
+    std::string adresaC = "Lalelelor,nr 15";
+    std::string getNumeC = c2.getNumeClient();
+    std::string getAdresaC = c2.getAdresaClient();
+    assert(numeC == getNumeC);
+    assert(adresaC == getAdresaC);
 
-
-    a = a;
-    assert(nume == a.getNumeClient());
-    assert(a.getPretTotal() == 30);
-    assert(numeMagazin == a.getNumeMagazin());
-
+    Comanda c1;
+    c1.setNumeClient((std::string)"Ion");
+    c1.setAdresaClient((std::string)"la");
+    c1.setPretTotal(50);
+    std::string numeC1 = "Ion";
+    std::string adresaC1 = "la";
+    assert(numeC1 == c1.getNumeClient());
+    assert(adresaC1 == c1.getAdresaClient());
+    std::cout<<"2\n";
 }
 
 void tests()
 {
-    testConstructor();
-    testSetGet();
+    testMancare();
+    testComanda();
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Mancare.h"
+
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
@@ -13,11 +13,17 @@ protected:
 
 public:
     Repo() : base_id(0) {};
+	// virtual void addAplicatie(const T&);
+	// virtual void updateAplicatie(T&, int);
+	// virtual void removeAplicatie(int);
+	// virtual int dim() const;
+	// virtual std::unordered_map<int, T>& getAll();
 	virtual void addAplicatie(const T&);
 	virtual void updateAplicatie(T&, int);
 	virtual void removeAplicatie(int);
-	virtual int dim() const;
-	virtual std::unordered_map<int, T>& getAll();
+	int dim() const;
+	void clear();
+	std::unordered_map<int, T>& getAll();
     
     ~Repo();
 
@@ -60,6 +66,12 @@ void Repo<T>::removeAplicatie(int pos)
 
 }
 
+template<typename T>
+void Repo<T>::clear()
+{
+	elems.clear();
+}
+
 template <typename T>
 std::unordered_map<int, T>& Repo<T>::getAll()
 {
@@ -79,9 +91,95 @@ Repo<T>::~Repo()
 }
 
 
-class AppRepo : public Repo<Mancare>
-{};
+
+// class AppRepo : public Repo<>
+// {};
 
 
+// #pragma once
+// #include "Comanda.h"
+// #include "Mancare.h"
+// #include "Shopping.h"
+// #include <unordered_map>
+// #include <iostream>
+// #include <algorithm>
 
+// template <typename T>
+// class Repo
+// {
+// protected:
+//     std::unordered_map < int, T> elems;
+// 	int base_id;
+
+// public:
+//     Repo() : base_id(0) {};
+// 	// virtual void addAplicatie(const T&);
+// 	// virtual void updateAplicatie(T&, int);
+// 	// virtual void removeAplicatie(int);
+// 	// virtual int dim() const;
+// 	// virtual std::unordered_map<int, T>& getAll();
+// 	void addAplicatie(const T&);
+// 	void updateAplicatie(T&, int);
+// 	void removeAplicatie(int);
+// 	int dim() const;
+// 	std::unordered_map<int, T>& getAll();
+    
+//     ~Repo();
+
+// };
+
+
+// template <typename T>
+// void Repo<T>::addAplicatie(const T& a)
+// {
+// 	for (auto& it : elems)
+// 	{
+// 		if (it.second == a)
+// 		{
+// 			throw std::string("Existing element!\n");
+// 		}
+// 	}
+// 	elems.insert({ base_id++, a });
+// }
+
+// template <typename T>
+// void Repo<T>::updateAplicatie(T& a, int pos)
+// {
+// 	//elems[pos]==a;
+// 	/*this->removeAplicatie(pos);
+// 	this->addAplicatie(a);*/
+// 	auto it = elems.find(pos);
+// 	if (it == elems.end())
+// 		throw std::string("Inexisting element!\n");
+// 	it->second = a;
+
+// }
+
+// template <typename T>
+// void Repo<T>::removeAplicatie(int pos)
+// {
+// 	auto it = elems.find(pos);
+// 	if (it == elems.end())
+// 		throw std::string("Inexisting element!\n");
+// 	elems.erase(pos);
+
+// }
+
+// template <typename T>
+// std::unordered_map<int, T>& Repo<T>::getAll()
+// {
+// 	return this->elems;
+// }
+
+// template <typename T>
+// int Repo<T>::dim() const
+// {
+// 	return this->elems.size();
+// }
+
+// template <typename T>
+// Repo<T>::~Repo()
+// {
+// 	base_id = 0;
+// }
 

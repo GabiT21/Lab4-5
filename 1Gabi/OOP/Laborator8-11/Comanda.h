@@ -1,25 +1,30 @@
 #pragma once
 #include <iostream>
+#include <string>
 
-class Mancare
-{
-    private:
+class Comanda{
+protected:
     std::string numeClient;
     std::string adresaClient;
-    int pretTotal;
+    float pretTotal;
 
-    public:
-    Mancare();
-    Mancare(const std::string numeClient, const std::string adresaClient, int pretTotal);
-    Mancare(const Mancare&);
-    ~Mancare();
-    const std::string& getNumeClient() const;
-    int getPretTotal() const;
-    const std::string& getAdresaClient() const ;
+public:
+    Comanda();
+    Comanda(const std::string& numeClient, const std::string& adresaClient, float);
+    Comanda(const Comanda&);
+    ~Comanda();
+
     void setNumeClient(const std::string&);
+    const std::string& getNumeClient() const;
     void setAdresaClient(const std::string&);
-    void setPretTotal(int);;
-    Mancare& operator=(const Mancare&);
-    bool operator==(const Mancare&) const;
-    friend std::ostream& operator<<(std::ostream& os, const Mancare& m);   
+    const std::string& getAdresaClient() const;
+    float getPretTotal();
+    void setPretTotal(float);
+
+    Comanda& operator=(const Comanda&);
+    bool operator==(const Comanda& other) const;
+    friend std::ostream& operator<<(std::ostream&, Comanda);
+
+    virtual std::string toString();
+    virtual std::string toStringWithDelimiter(char);
 };

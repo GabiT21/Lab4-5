@@ -1,31 +1,26 @@
 #pragma once
-#include <iostream>
+#include "Comanda.h"
 
-class Shopping
+class Shopping : public Comanda
 {
-    private:
-    std::string numeClient;
-    std::string adresaClient;
+private:
     std::string listaCumparaturi;
-    int pretTotal;
     std::string numeMagazin;
 
-    public:
+public:
     Shopping();
-    Shopping(const std::string numeClient, const std::string adresaClient,const std::string listaCumparaturi, int pretTotal, const std::string numeMagazin);
+    Shopping(const std::string, const std::string, const std::string, float, const std::string);
     Shopping(const Shopping&);
+    Shopping(std::string, char);
     ~Shopping();
-    const std::string& getNumeClient() const;
-    int getPretTotal() const;
-    const std::string& getAdresaClient() const ;
-    const std::string& getNumeMagazin() const ;
-    const std::string& getListaCumparaturi() const;
-    void setNumeClient(const std::string&);
-    void setAdresaClient(const std::string&);
-    void setListaCumparaturi(const std::string&);
-    void setPretTotal(int);
-    void setNumeMagazin(const std::string&);
+    const std::string getListaCumparaturi();
+    void setListaCumparaturi(const std::string);
+    const std::string getNumeMagazin();
+    void setNumeMagazin(const std::string);
+
     Shopping& operator=(const Shopping&);
     bool operator==(const Shopping&) const;
-    friend std::ostream& operator<<(std::ostream& os, const Shopping& m);   
+    
+    std::string toStringWithDelimiter(char);
+    friend std::ostream& operator<<(std::ostream&, Shopping);
 };

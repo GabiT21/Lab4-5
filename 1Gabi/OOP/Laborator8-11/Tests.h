@@ -1,5 +1,10 @@
 #pragma once
+#include "Comanda.h"
+#include "Mancare.h"
+#include "Shopping.h"
+#include "Repo.h"
+#include "RepoFile.h"
 
-void testConstructor();
-void testSetGet();
+void testComanda();
+void testMancare();
 void tests();

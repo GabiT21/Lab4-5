@@ -1,81 +1,85 @@
-#include "Mancare.h"
+#include "Comanda.h"
 
-Mancare::Mancare() : numeClient{NULL}, adresaClient{NULL}, pretTotal{0}
+Comanda::Comanda() : numeClient(""), adresaClient(""), pretTotal(0.0f)
 {}
 
-Mancare::Mancare(const std::string numeClient, const std::string adresaClient, int pretTotal, const std::string numeMagazin)
-: numeClient{numeClient}, adresaClient{adresaClient}, pretTotal{pretTotal}, numeMagazin{numeMagazin}
+Comanda::Comanda(const std::string& numeClient, const std::string& adresaClient, float pretTotal) : numeClient(numeClient), adresaClient(adresaClient), pretTotal(pretTotal)
 {}
 
-Mancare::Mancare(const Mancare& m)
-{
-    this->numeClient = m.numeClient;
-    this->adresaClient = m.adresaClient;
-    this->pretTotal = m.pretTotal;
-    this->numeMagazin = m.numeMagazin;
-}
-
-Mancare::~Mancare()
+Comanda::Comanda(const Comanda& c) : numeClient(c.numeClient), adresaClient(c.adresaClient),  pretTotal(c.pretTotal)
 {}
+  
+Comanda::~Comanda()
+{} 
 
-const std::string& Mancare::getNumeClient() const
+const std::string& Comanda::getNumeClient() const
 {
     return numeClient;
 }
 
-const std::string& Mancare::getAdresaClient() const
+const std::string& Comanda::getAdresaClient() const
 {
     return adresaClient;
 }
 
-int Mancare::getPretTotal() const
+float Comanda::getPretTotal()
 {
     return pretTotal;
 }
 
-const std::string& Mancare::getNumeMagazin() const
+void Comanda::setNumeClient(const std::string& numeC)
 {
-    return numeMagazin;
+    numeClient = numeC;
 }
 
-void Mancare::setNumeClient(const std::string& nClient)
-{
-    numeClient = nClient;
-}
-
-void Mancare::setAdresaClient(const std::string& adresaC)
+void Comanda::setAdresaClient(const std::string& adresaC)
 {
     adresaClient = adresaC;
 }
 
-void Mancare::setPretTotal(const int p)
+void Comanda::setPretTotal(float pt)
 {
-    pretTotal = p;
-}
-
-void Mancare::setNumeMagazin(const std::string& numeMag)
-{
-    numeMagazin = numeMag;
+    pretTotal = pt;
 }
 
 
-Mancare& Mancare::operator=(const Mancare& other)
+Comanda& Comanda::operator=(const Comanda& other)
 {
-    if (*this == other)
-        return *this;
-    this->numeClient   = other.numeClient;
-    this->adresaClient = other.adresaClient;
-    this->pretTotal    = other.pretTotal;
-    this->numeMagazin  = other.numeMagazin;
+    // if(*this == other)
+    //     return *this;
+    numeClient   = other.numeClient;
+    adresaClient = other.adresaClient;
+    pretTotal    = other.pretTotal;
+    return *this;
+
 }
 
-bool Mancare::operator==(const Mancare& other) const
+bool Comanda::operator==(const Comanda& other) const
 {
-    return this->numeClient   == other.numeClient and this->adresaClient == other.adresaClient and this->pretTotal    == other.pretTotal and this->numeMagazin  == other.numeMagazin;
+    return this->numeClient == other.numeClient and this->adresaClient == other.adresaClient and this->pretTotal == other.pretTotal;
 }
 
-std::ostream& operator<<(std::ostream& os, const Mancare& a)
+
+std::ostream& operator<<(std::ostream& os, Comanda a)
 {
-    os << a.numeClient << " " << a.adresaClient << " " << a.pretTotal<<" "<<a.numeMagazin;
+    os << a.getNumeClient() << " " << a.getAdresaClient() << " " << a.getPretTotal() <<"\n";
     return os;
+}
+
+
+std::string Comanda::toString()
+{
+    std::string str1, str2;
+    str1 = numeClient;
+    str2 = adresaClient;
+    return str1 + " " + str2 + " " + std::to_string(pretTotal);
+}
+
+std::string Comanda::toStringWithDelimiter(char delimiter)
+{
+    std::string str1, str2;
+    str1 = numeClient;
+    str2 = adresaClient;
+    return str1 + delimiter + str2 + delimiter + std::to_string(pretTotal);
+
 }
