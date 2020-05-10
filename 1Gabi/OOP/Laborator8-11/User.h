@@ -16,4 +16,5 @@ public:
 	std::string toString();
 	std::string toStringDelimiter(char delimiter);
 	~User();
+ 
 };
