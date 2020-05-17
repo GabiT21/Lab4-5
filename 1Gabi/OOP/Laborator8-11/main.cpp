@@ -1,25 +1,39 @@
 #include <iostream>
-#include "TestRepo.h"
-#include "Tests.h"
-#include "Service.h"
 #include "Repo.h"
 #include "RepoFile.h"
-#include "Validator.h"
+#include "RepoFileCSV.h"
+#include "RepoFileHTML.h"
+#include "Service.h"
+#include "TestRepo.h"
+#include "Tests.h"
+#include "SerializerComanda.h"
 #include "UI.h"
-#include "User.h"
-#include "Comanda.h"
 
 int main()
 {
+    int op;
     tests();
     repoTest();
-    
-    // Repo<Comanda> RC();
-    // Repo<User> RU();
+    std::cout<< "Teste trecute cu succes! \n";  
 
-    // Service S(RC, RU);
+    std::cout << "Fisierul ales( CSV(0) / HTML(1) )\n";
+    std::cin >> op;
+    if( op == 0)
+    {
+        SerializerComanda* sc = new SerializerComanda;
+        RepoFileCSV <Comanda*> repoC("Comanda.csv", sc);
+        Service service(repoC);
+        UI ui(service);
+        ui.printMenu();
+    }
 
-    // UI ui(S);
-    // ui.run();
+    if( op == 1)
+    {
+        SerializerComanda* sc = new SerializerComanda;
+        RepoFileCSV <Comanda*> repoH("Comanda.html", sc);
+        Service service(repoH);
+        UI ui(service);
+        ui.printMenu();
+    }
 
 }

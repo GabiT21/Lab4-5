@@ -10,7 +10,7 @@ class RepoFileHTML : public AppRepoFile<T>
 {
 public:
 	RepoFileHTML() : AppRepoFile<T>() {
-		delim = "<br>";
+		AppRepoFile<T>::delim = "<br>";
 	}
 	RepoFileHTML(const char* filename, Serializer<T>* S)
 	{

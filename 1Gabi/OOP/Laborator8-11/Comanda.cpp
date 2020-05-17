@@ -8,7 +8,15 @@ Comanda::Comanda(const std::string& numeClient, const std::string& adresaClient,
 
 Comanda::Comanda(const Comanda& c) : numeClient(c.numeClient), adresaClient(c.adresaClient),  pretTotal(c.pretTotal)
 {}
-  
+
+// Comanda::Comanda(std:: string line, char delim)
+// {
+//     std::vector <std::string> token = splitLine(line, delim);
+//     numeClient = token[0];
+//     adresaClient = token[1];
+//     pretTotal = stof(token[2]);
+// }
+
 Comanda::~Comanda()
 {} 
 

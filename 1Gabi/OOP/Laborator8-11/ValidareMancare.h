@@ -12,4 +12,4 @@ public:
     std::vector<std::string> getEroare();
 };
 
-//class ValidareMancare: public:
+class ValidareMancare: public:

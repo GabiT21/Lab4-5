@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Comanda{
 protected:
@@ -10,16 +11,18 @@ protected:
 
 public:
     Comanda();
-    Comanda(const std::string& numeClient, const std::string& adresaClient, float);
+    Comanda(const std::string& , const std::string& , float);
     Comanda(const Comanda&);
+    Comanda(std::string, char);
     ~Comanda();
 
     void setNumeClient(const std::string&);
-    const std::string& getNumeClient() const;
     void setAdresaClient(const std::string&);
+    void setPretTotal(float);
+    
+    const std::string& getNumeClient() const;
     const std::string& getAdresaClient() const;
     float getPretTotal();
-    void setPretTotal(float);
 
     Comanda& operator=(const Comanda&);
     bool operator==(const Comanda& other) const;

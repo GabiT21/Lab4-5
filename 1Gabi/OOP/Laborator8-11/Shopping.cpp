@@ -25,7 +25,7 @@ Shopping::Shopping(std::string linie, char delim)
     numeClient = tokens[0];
     adresaClient = tokens[1];
     listaCumparaturi = tokens[2];
-    pretTotal = stoi(tokens[3]);
+    pretTotal = stof(tokens[3]);
     numeMagazin = tokens[4];
 }
 
@@ -54,11 +54,14 @@ const std::string Shopping::getNumeMagazin()
 
 Shopping& Shopping::operator=(const Shopping& other)
 {
-    Comanda::operator=(other);
     if(*this == other)
         return *this;
+
+    Comanda::operator=(other);
     listaCumparaturi = other.listaCumparaturi;
     numeMagazin = other.numeMagazin;
+    
+    return *this;
 }
 
 bool Shopping::operator==(const Shopping& other) const

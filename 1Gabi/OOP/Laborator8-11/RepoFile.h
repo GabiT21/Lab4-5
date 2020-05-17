@@ -1,12 +1,10 @@
  #pragma once
- #include "Comanda.h"
- #include "Mancare.h"
- #include "Shopping.h"
  #include "Repo.h"
- #include "Serializer.h"
- #include <unordered_map>
  #include <fstream>
- #include <algorithm>
+ #include <iostream>
+ #include <map>
+ #include "Serializer.h"
+ #include "Utils.h"
 
 template <class T> 
 class AppRepoFile : public Repo<T> //: public AppRepo
@@ -28,6 +26,7 @@ public:
     void addAplicatie(const T&);
     void updateAplicatie(T&, int);
     void removeAplicatie(int);
+    T getItemFromPos(int);
     int dim();
     std::unordered_map<int, T>& getAll();
 
@@ -91,13 +90,21 @@ void AppRepoFile<T>::updateAplicatie(T& e, int pos)
     this->saveToFile();
 }
 
+template <class T>
+T AppRepoFile<T>::getItemFromPos(int pos)
+{
+    return Repo<T>::getItemFromPos(pos);
+}
+
 template <typename T>
 void AppRepoFile<T>::saveToFile()
 {
     if(fileName == NULL)
         return;
     std::ofstream fout(fileName);
-    for (auto t : this->elems)
+    std::unordered_map<int, T> elems = this->getAll();
+    for (auto t : elems)
+       // fout << serializer->fromString(t->second, delim) << "\n";
         fout << t.second.toStringWithDelimiter(delim) << "\n";
     fout.close();
 }
@@ -114,9 +121,73 @@ void AppRepoFile<T>::loadFromFile(const char* fileName)
     Repo<T>::clear();
     std::string line;
    // if(fin.is_open())
-    {
-        while(std::getline(fin, line))
-            Repo<T>::addAplicatie(serializer->fromString(line,delim));
-        fin.close();
-    }
+    while(std::getline(fin, line))
+        Repo<T>::addAplicatie(serializer->fromString(line,delim));
+    fin.close();
 }
+
+
+
+
+//ce era inaite
+
+// // #pragma once
+// // #include "Comanda.h"
+// // #include "Mancare.h"
+// // #include "Shopping.h"
+// // #include "Repo.h"
+// // #include <unordered_map>
+// // #include <iostream>
+// // #include <algorithm>
+
+// // template <class T> class AppRepoFile : public Repo<T> //: public AppRepo
+// // {
+// // protected:
+// //     const char* fileName;
+
+// // public:
+// //     // AppRepoFile();
+// //     // AppRepoFile(const char*);
+// //     // virtual void saveToFile();
+// //     // virtual void loadFromFile();
+// //     // ~AppRepoFile();
+
+
+// //     AppRepoFile();
+// //     AppRepoFile(const char*);
+// //     ~AppRepoFile();
+// //     void loadFromFile();
+// //     void saveToFile();
+// //     void addAplicatie(const T&);
+// //     void updateAplicatie(T&, int);
+// //     void removeAplicatie(int);
+// //     int dim();
+// //     std::unordered_map<int, T>& getAll();
+
+// // };
+
+// // template<class T>
+// // AppRepoFile<T>::AppRepoFile(): Repo<T>()
+// // {}
+
+// // template <class T>
+// // AppRepoFile<T>::AppRepoFile(const char* fis)
+// // {
+// //     fileName = fis;
+// // }
+
+// // template <class T>
+// // AppRepoFile<T>::~AppRepoFile()
+// // {}
+
+// // template <class T>
+// // void AppRepoFile<T>::saveToFile()
+// // {}
+
+// // template <class T>
+// // void AppRepoFile<T>::loadFromFile()
+// // {}
+
+
+
+

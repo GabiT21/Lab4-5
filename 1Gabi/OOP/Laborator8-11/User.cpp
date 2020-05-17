@@ -3,12 +3,13 @@
 
 
 User::User()
-{
-}
+{}
 
-User::User(std::string u,std::string p):userName(u),password(p)
-{
-}
+User::User(std::string us,std::string pass):userName(us),password(pass)
+{}
+
+User::~User()
+{}
 
 std::string User::getUserName()
 {
@@ -20,19 +21,19 @@ std::string User::getPassword()
 	return password;
 }
 
-void User::setUserName(std::string u)
+void User::setUserName(std::string us)
 {
-	userName = u;
+	userName = us;
 }
 
-void User::setPassword(std::string p)
+void User::setPassword(std::string pass)
 {
-	password=p;
+	password = pass;
 }
 
-bool User::operator==(const User & u)
+bool User::operator==(const User& u)
 {
-	return (userName==u.userName) and (password==u.password);
+	return (userName == u.userName) and (password == u.password);
 }
 
 std::string User::toString()
@@ -46,6 +47,3 @@ std::string User::toStringDelimiter(char delimiter)
 }
 
 
-User::~User()
-{
-}

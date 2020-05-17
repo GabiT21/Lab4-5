@@ -2,12 +2,16 @@
 #include <string>
 
 class User
-{private:
+{
+private:
 	std::string userName;
 	std::string password;
+
 public:
 	User();
 	User(std::string, std::string);
+	~User();
+	
 	std::string getUserName();
 	std::string getPassword();
 	void setUserName(std::string);
@@ -15,6 +19,4 @@ public:
 	bool operator==(const User& u);
 	std::string toString();
 	std::string toStringDelimiter(char delimiter);
-	~User();
- 
 };

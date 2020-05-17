@@ -1,10 +1,11 @@
 #include "Tests.h"
 #include "assert.h"
+#include "SerializerComanda.h"
 
 void testMancare()
 {
 
-    Mancare m2("Vasile", "Lalelor,nr 15",25 , "lapte, oua");
+    Mancare m2("Vasile", "Lalelor,nr 15","lapte, oua", 25);
     Mancare m3(m2);
 
     m2 = m3;
@@ -37,6 +38,12 @@ void testComanda()
     assert(numeC1 == c1.getNumeClient());
     assert(adresaC1 == c1.getAdresaClient());
     std::cout<<"2\n";
+}
+
+void CSV()
+{
+    // const char* fname = "Comanda.csv";
+    // SerializerComanda* s = new SerializerComanda();
 }
 
 void tests()

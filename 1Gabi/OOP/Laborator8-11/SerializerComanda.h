@@ -5,6 +5,7 @@
 #include "Shopping.h"
 #include "Mancare.h"
 #include "Serializer.h"
+#include "Utils.h"
 #include <vector>
 
 
@@ -13,10 +14,10 @@ class SerializerComanda: public Serializer<Comanda*>
 public:
     SerializerComanda() {};
     ~SerializerComanda () {};
-    inline Comanda* fromString(std::string ,char) override;
+    Comanda* fromString(std::string ,char) override;
 };
 
-Comanda* SerializerComanda::fromString(std::string line, char delim) override
+Comanda* SerializerComanda::fromString(std::string line, char delim)
 {
     std::vector<std::string> tokens;
     std::stringstream ss(line);
@@ -27,18 +28,17 @@ Comanda* SerializerComanda::fromString(std::string line, char delim) override
     }
     if(tokens.size() == 4)
     {
-        try
-        {
-            int i = std::stoi(tokens[3]);
-            Comanda* c = new Mancare(line, delim);
-            return c;
-        }
-        catch(...)
-        {
-            Comanda* c =  new Shopping(line, delim);
-            return c;
-        }
-        
+        Comanda* mancare = new Mancare(line, delim);
+        return mancare;   
     }
+    else
+        if(tokens.size() == 5)
+        {
+            Comanda* shopping = new Shopping(line, delim);
+            return shopping;
+        }
 
 }
+
+
+

@@ -4,15 +4,18 @@
 class UI {
 private:
     Service service;
+    User user;
 
 public:
     UI(Service&);
-    void menu1();
+    ~UI();
+
     int login();
     void logout();
-    void menu2();
     void add();
-    void showAll();
-    void run();
-    ~UI();
+    void deletee();
+    void update();
+    void getAll();
+    void cautareDupaNume();
+    void printMenu();
 };

@@ -10,7 +10,7 @@ class RepoFileCSV : public AppRepoFile<T>
 {
 public:
 	RepoFileCSV() : AppRepoFile<T>(){
-		delim = ',';
+		AppRepoFile<T>::delim = ',';
 	}
 	RepoFileCSV(const char* filename, Serializer<T>* S)
 	{
